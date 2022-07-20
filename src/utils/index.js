@@ -115,3 +115,16 @@ export function param2Obj(url) {
   })
   return obj
 }
+
+// 用于处理把普通数组变成树形结构
+// list中每一项有两个属性 id,pid
+export function transferListToTree (list, pid) {
+  var list1 = []
+  list.forEach(item => {
+    if (item.pid === pid) {
+      list1.push(item)
+      item.children = transferListToTree(list, item.id)
+    }
+  })
+  return list1
+}

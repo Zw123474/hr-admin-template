@@ -5,7 +5,7 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // 引入语言包 做国际化
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+// import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 // 全局公共样式
 import '@/styles/index.scss' // global css
 
@@ -15,7 +15,7 @@ import router from './router'
 
 import '@/icons' // icon svg图标
 import '@/permission' // permission control 权限控制
-
+import 'default-passive-events'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -30,11 +30,20 @@ import '@/permission' // permission control 权限控制
 // }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+// Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
-// Vue.use(ElementUI)
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+
+import * as obj from '@/directives'
+Object.keys(obj).forEach(item => {
+  Vue.directive(item, obj[item])
+})
+
+import components from '@/components'
+
+Vue.use(components)
 
 new Vue({
   el: '#app',
