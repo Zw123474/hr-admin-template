@@ -45,6 +45,15 @@ import components from '@/components'
 
 Vue.use(components)
 
+import Print from 'vue-print-nb'
+// Global instruction
+Vue.use(Print)
+
+import * as filters from '@/filters'
+Object.keys(filters).forEach(item => {
+  Vue.filter(item, filters[item])
+})
+
 new Vue({
   el: '#app',
   router,
